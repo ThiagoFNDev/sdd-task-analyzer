@@ -1,0 +1,18 @@
+module: TaskAnalyzer
+version: 1.0.0
+function: analyze_tasks
+inputs:
+  tasks:
+    type: list
+    items: dict
+outputs:
+  metrics:
+    type: TypedDict
+    fields:
+      tempo_medio_conclusao_dias: float
+      taxa_atraso: float
+      metricas_por_prioridade: dict
+rules:
+  - zero_division_prevention: "Retornar 0.0 caso não existam tarefas concluídas"
+  - date_validation: "Lançar TaskValidationError se data_conclusao < data_criacao"
+  - standard_library_only: "Proibido utilizar bibliotecas externas em src/"
